@@ -67,3 +67,5 @@ PUT /mammals/_doc/100
 }
 
 
+=================== To return limited rows
+GET /mammals/_search?size=2
