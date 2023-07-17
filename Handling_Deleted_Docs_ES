@@ -1,0 +1,22 @@
+
+===============
+- Presence of deleted docs might impact the read and writes operation on ES
+
+Deleting documents only flags these as deleted, so they would not be searched. To reclaim disk space, you have to optimize the index:
+
+curl -XPOST 'http://localhost:9200/_optimize?only_expunge_deletes=true'
+
+POST /_forcemerge?only_expunge_deletes=true 
+
+
+== To get the Doc count and deleted doc count
+  GET /_cat/indices?v
+O/P:
+  health status  index                             uuid                   pri rep docs.count docs.deleted store.size pri.store.size
+  green  open   .fleet-file-data-agent-000001     BoEUhGuhRj2lMBCodGJc1g   1   1          0            0       494b           247b
+
+== To Get the segment size 
+  GET /_cat/segments?v
+O/P:
+  index                                                   shard prirep   ip          segment generation docs.count docs.deleted   size size.memory committed searchable version compound
+.ds-logs-enterprise_search.api-default-2023.07.17-000001   0     r     10.42.1.148    _0           0        1            0        14kb        0       true      true       9.6.0   true
