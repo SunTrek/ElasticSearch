@@ -1,0 +1,70 @@
+=================
+Basic Commands for ES Cluster
+
+1. GET /_cluster/health
+  {
+  "cluster_name": "722b646bec0140f68ca8c8929daf0c32",
+  "status": "green",
+  "timed_out": false,
+  "number_of_nodes": 3,
+  "number_of_data_nodes": 2,
+  "active_primary_shards": 104,
+  "active_shards": 208,
+  "relocating_shards": 0,
+  "initializing_shards": 0,
+  "unassigned_shards": 0,
+  "delayed_unassigned_shards": 0,
+  "number_of_pending_tasks": 0,
+  "number_of_in_flight_fetch": 0,
+  "task_max_waiting_in_queue_millis": 0,
+  "active_shards_percent_as_number": 100
+}
+
+2.GET /_cat/nodes?v
+  ip          heap.percent ram.percent cpu load_1m load_5m load_15m node.role master name
+10.42.2.25             9          67   2    0.58    0.86     1.07 himrst    *      instance-0000000001
+10.42.9.181           49          93   0    0.88    1.31     1.40 mv        -      tiebreaker-0000000002
+10.42.1.148           23          67   2    5.09   10.35     6.36 himrst    -      instance-0000000000
+
+3. GET /_cat/nodes
+  10.42.2.25  15 67 1 0.42 0.80 1.04 himrst * instance-0000000001
+  10.42.9.181 53 93 0 0.98 1.30 1.39 mv     - tiebreaker-0000000002
+  10.42.1.148 28 67 2 4.42 9.68 6.26 himrst - instance-0000000000
+
+4. GET /_cat/nodeattrs?v
+node                  host        ip          attr                      value
+instance-0000000001   10.42.2.25  10.42.2.25  xpack.installed           true
+instance-0000000001   10.42.2.25  10.42.2.25  logical_availability_zone zone-1
+instance-0000000001   10.42.2.25  10.42.2.25  availability_zone         us-central1-a
+instance-0000000001   10.42.2.25  10.42.2.25  region                    unknown-region
+instance-0000000001   10.42.2.25  10.42.2.25  instance_configuration    gcp.es.datahot.n2.68x10x45
+instance-0000000001   10.42.2.25  10.42.2.25  server_name               instance-0000000001.722b646bec0140f68ca8c8929daf0c32
+instance-0000000001   10.42.2.25  10.42.2.25  data                      hot
+tiebreaker-0000000002 10.42.9.181 10.42.9.181 xpack.installed           true
+tiebreaker-0000000002 10.42.9.181 10.42.9.181 logical_availability_zone tiebreaker
+tiebreaker-0000000002 10.42.9.181 10.42.9.181 availability_zone         us-central1-c
+tiebreaker-0000000002 10.42.9.181 10.42.9.181 region                    unknown-region
+tiebreaker-0000000002 10.42.9.181 10.42.9.181 instance_configuration    gcp.es.master.n2.68x32x45.2
+tiebreaker-0000000002 10.42.9.181 10.42.9.181 server_name               tiebreaker-0000000002.722b646bec0140f68ca8c8929daf0c32
+tiebreaker-0000000002 10.42.9.181 10.42.9.181 data                      hot
+instance-0000000000   10.42.1.148 10.42.1.148 xpack.installed           true
+instance-0000000000   10.42.1.148 10.42.1.148 logical_availability_zone zone-0
+instance-0000000000   10.42.1.148 10.42.1.148 availability_zone         us-central1-b
+instance-0000000000   10.42.1.148 10.42.1.148 region                    unknown-region
+instance-0000000000   10.42.1.148 10.42.1.148 instance_configuration    gcp.es.datahot.n2.68x10x45
+instance-0000000000   10.42.1.148 10.42.1.148 server_name               instance-0000000000.722b646bec0140f68ca8c8929daf0c32
+instance-0000000000   10.42.1.148 10.42.1.148 data                      hot
+
+5. To List the indices
+  GET /_cat/indices?v
+
+  health status index                                                        uuid                   pri rep docs.count docs.deleted store.size pri.store.size
+green  open   .internal.alerts-observability.logs.alerts-default-000001    r8qKpvKmSMyZ9paDgTYb-Q   1   1          0            0       494b           247b
+green  open   .ds-logs-enterprise_search.audit-default-2023.07.17-000001   6B-8XZ4LRlOkCMPnpqtEFA   1   1          7            0     95.9kb         47.9kb
+green  open   .internal.alerts-observability.metrics.alerts-default-000001 V_TS563nQkiOqcfKzbtSGA   1   1          0            0       494b           247b
+green  open   .fleet-file-data-agent-000001                                BoEUhGuhRj2lMBCodGJc1g   1   1          0            0       494b           247b
+
+
+
+
+
