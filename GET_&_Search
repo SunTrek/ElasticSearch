@@ -1,4 +1,8 @@
-===================
+==================
+API Reference-
+
+https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-index_.html
+
 ============Creating Document and fetching the data========
 
 POST /mammals/_doc/23
